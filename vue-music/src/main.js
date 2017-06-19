@@ -5,7 +5,7 @@ import router from './router';
 import fastclick from 'fastclick';
 
 // import 'common/stylus/index.styl'
-// import 'common/sass/index.sass';
+import 'common/sass/index.sass';
 
 fastclick.attach(document.body);
 

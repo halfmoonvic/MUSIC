@@ -33,7 +33,14 @@ routes: [
         redirect: '/pathName'
         // 通过此种方式 可替代 router.push(name) 的方法
     },
-    {path: '/pathName', name: 'name', component: name},
+    {
+        path: '/pathName',
+        name: 'name',
+        components: {
+            header: header,
+            footer: footer
+        }
+    },
     {},
     {}]
 ```
@@ -49,6 +56,8 @@ const router = new VueRouter({
 1. vue-router 在 安装成功后 需要 通过 Vue.use() 明确地安装路由功能 即 `Vue.use(VueRouter);`  
 2. 同 vue-router 一样，vue-resource 也需要通过 Vue.use 明确安装使用
 
+##### 总结感想
+1. 路由的设置是 设置不同的路径对应着不同的组件。即一个 path 对应着 一个 component(components)。在页面中通过`<router-view>`来展示对应的组件。一个页面自然可以有多个组件（components）。
 
 #### 3. prop传值
 ```

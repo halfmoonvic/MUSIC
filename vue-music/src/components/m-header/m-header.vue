@@ -17,6 +17,7 @@
   @import "~common/sass/mixin";
 
   .m-header
+    // @include flex()
     position: relative
     height: 44px
     text-align: center
