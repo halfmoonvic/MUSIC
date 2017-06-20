@@ -13,6 +13,39 @@
 
 -----------
 
+### JSONP 相关
+参考资料： [说说JSON和JSONP，也许你会豁然开朗，含jQuery用例](http://www.cnblogs.com/dowinning/archive/2012/04/19/json-jsonp-jquery.html)
+1. jsonp 之所以能够跨域是因为它发送的并不是Ajax请求，它动态创建`script`标签，`script`并没有同源策略限制的，将`script` 的 `src` 指向服务器端地址，其中在 `script` 标签中写好回调函数，以供前台处理数据（简而言之，就是利用 `script` 标签 来代替 ajax 请求数据）
+2. example： `<script src="http://flightQuery.com/jsonp/flightResult.aspx?code=CA1998&callback=flightHandler"></script>` 返回来的数据为   
+```   
+flightHandler({
+    "code": "CA1998",
+    "price": 1780,
+    "tickets": 5
+});
+```
+之后 你事先在本地事先定义好 `flightHandler` 函数，如此返回来的数据 就直接调用 `flightHandler` 函数了（这也就是 前台与后端事先定义好回调函数的原因，不然怎么执行你本地的函数）
+------------
+
+#### js 相关
+1. 三元函数 
+    `let value = data[k] !== undefined ? data[k] : ''`  
+    而不是
+    `data[k] !==undefined? value = data[k] : value = ''`  这样还需要 提前声明 value 变量
+2. 对象合并
+```
+const data = Object.assign({}, commonParams, {
+    platform: 'h5',
+    uin: 0,
+    needNewCode: 1
+})
+```
+参考链接： [es6 javascript对象方法Object.assign()](http://blog.csdn.net/qq_30100043/article/details/53422657)
+3. promise 在 数据中的应用
+在创建的 `var aa = new Promise((resolve, reject)=>{})`对象中 进行数据的请求，数据 请求成功后 进行链式的写法 aa.then(resData) 的形式处理数据
+
+-----------
+
 ### vue相关
 #### 1. 初始化安装过程
 0. 安装依赖—— npm install -g vue-cli
@@ -58,6 +91,7 @@ const router = new VueRouter({
 
 ##### 总结感想
 1. 路由的设置是 设置不同的路径对应着不同的组件。即一个 path 对应着 一个 component(components)。在页面中通过`<router-view>`来展示对应的组件。一个页面自然可以有多个组件（components）。
+2. 点击`router-link`，内部执行 `router.push()`，同时查看`router-link`上的`path`。找寻路由对应的`path`，查看路由上`path`上对应的`components`，之后在相应的`router-view`上予以展示
 
 #### 3. prop传值
 ```
