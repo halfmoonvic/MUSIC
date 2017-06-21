@@ -1,7 +1,15 @@
 <template>
     <div class="recommend">
         <div class="recommend-content">
-            <div class="slider-wrapper"></div>
+            <div class="slider-wrapper">
+                <!-- <slider> -->
+                    <div v-for="item in recommends">
+                        <a :href="item.linkUrl">
+                            <img :src="item.picUrl">
+                        </a>
+                    </div>
+                <!-- </slider> -->
+            </div>
             <div class="recommend-list">
                 <h1 class="list-title">热门歌单推荐</h1>
                 <ul></ul>
@@ -12,19 +20,38 @@
 </template>
 
 <script>
+import slider from './../../base/slider/slider.vue';
 import {getRecommend} from 'api/recommend';
-import {ERR_OK} from 'api/config'
+import {ERR_OK} from 'api/config';
+
 export default {
     created() {
-        this._getRecommend();
+        // this.$nextTick(function () {
+            this._getRecommend();
+        // });
+    },
+    data() {
+        return {
+            recommends: []
+        }
+    },
+    components: {
+        slider
     },
     methods: {
         _getRecommend: () => {
-            getRecommend().then((res)=> {
-                console.log(res);
-                if (res.code === ERR_OK) {
-                    console.log(res.data.slider);
-                }
+            // getRecommend().then((res)=> {
+            //     if (res.code === ERR_OK) {
+            //         this.recommends = res.data.slider;
+            //         console.log(this.recommends);
+            //         debugger
+            //     }
+            // })
+            getRecommend().then((res) => {
+              if (res.code === ERR_OK) {
+                this.recommends = res.data.slider
+                console.log(this.recommends);
+              }
             })
         }
     }
