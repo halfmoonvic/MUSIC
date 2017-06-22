@@ -114,5 +114,7 @@ props: {
 }
 ```
 注意：  
-
+ 
 1. 应用时，是 selectFoods[0].price 而不是 selectFoods.price
+2. 父子传值的时候如 `<v-header :sellerSon="sellerParent"></v-header>`，其中 附件获取数据是一个异步的过程，这时候 父组件的 `sellerParent` 还是空对象的时候 就会先将这个空对象给子组件，子组件一些 `sellerSon.something` 事实上为 `undefined`,而如果 需设置 `sellerSon.something[0].else` 时候就需要 加一个 `v-if` 来判断数据是否获取，不然 就是 `property '0' of undefined` 这种，会报错 
+3. 非动态传值时（如传递字符串）就不要使用 'v-bind' 语法了

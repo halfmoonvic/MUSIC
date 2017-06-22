@@ -1,12 +1,10 @@
 <template>
-    <div>我是男孩</div>
+    <div>歌手页面</div>
 </template>
 
 <script>
-// import {} from './config.js';
-
 export default {
-    name: 'boy',
+    name: 'singer',
     props: {
         title: {
             type: String
@@ -16,15 +14,10 @@ export default {
         return {
 
         };
-    },
-    created() {
-        // this._getRecommend();
-    },
-    methods: {
-
     }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="sass" scoped>
+
 </style>

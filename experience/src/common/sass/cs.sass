@@ -1,0 +1,34 @@
+@mixin flex($justify: flex-start, $align-items: center, $dir: row, $wrap: nowrap)
+    display: flex
+    flex-flow: $dir $wrap
+    justify-content: $justify
+    align-items: $align-items
+
+@mixin justify($font-size: 0)
+    text-align: justify
+    text-justify: distribute-all-lines
+    text-align-last: justify
+    -moz-text-align-last: justify
+    -webkit-text-align-last: justify
+    font-size: $font-size
+
+@mixin vertical($font-size: 16px,$direction: middle)
+    display: inline-block
+    vertical-align: $direction
+    font-size: $font-size
+
+@mixin tl($direction: left)
+    text-align: $direction
+    text-align-last: $direction
+
+@mixin linear($angle: 180deg, $color1: #000, $color2: #fff)
+    background: ($color1+$color2)/2
+    background: linear-gradient($angle, $color1, $color2)
+
+@mixin transition($sec: 0.2s)
+    transition: all $sec ease-in
+
+@mixin no-wrap()
+  text-overflow: ellipsis
+  overflow: hidden
+  white-space: nowrap

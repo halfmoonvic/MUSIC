@@ -1,0 +1,40 @@
+@import "./cs"
+// 背景图片
+@mixin bg-image($url)
+  background-image: url($url + "@2x.png")
+  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
+    background-image: url($url + "@3x.png")
+
+// 不换行
+
+// 扩展点击区域
+extend-click()
+  position: relative
+  &:before
+    content: ''
+    position: absolute
+    top: -10px
+    left: -10px
+    right: -10px
+    bottom: -10px
+
+@mixin bd-1px($color)
+    position: relative
+    &::after
+        content: ''
+        display: block
+        position: absolute
+        left: 0
+        bottom: 0
+        width: 100%
+        border-top: 1px solid $color
+
+%bd-1px
+    @media (-webkit-min-device-pixel-ratio: 1.5) and (min-device-pixel-ratio: 1.5)
+        &::after
+            -webkit-transform: scaleY(0.7)
+            transform: scaleY(0.7)
+    @media (-webkit-min-device-pixel-ratio: 2) and (min-device-pixel-ratio: 2)
+        &::after
+            -webkit-transform: scaleY(0.5)
+            transform: scaleY(0.5)

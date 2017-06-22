@@ -2,13 +2,14 @@
     <div class="recommend">
         <div class="recommend-content">
             <div class="slider-wrapper" v-if="recommends.length">
-                <slider>
+                <slider :slider="recommends"></slider>
+                <!-- <slider>
                     <div v-for="item in recommends">
                         <a :href="item.linkUrl">
                             <img :src="item.picUrl">
                         </a>
                     </div>
-                </slider>
+                </slider> -->
             </div>
             <div class="recommend-list">
                 <h1 class="list-title">热门歌单推荐</h1>
