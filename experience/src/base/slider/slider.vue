@@ -3,7 +3,7 @@
         <div class="slider-group" ref="sliderGroup">
             <!-- <slot> -->
             <!-- </slot> -->
-            <div v-for="item in slider">
+            <div v-for="item in sliderson">
                 <a :href="item.linkUrl">
                     <img :src="item.picUrl">
                 </a>
@@ -16,14 +16,13 @@
 </template>
 
 <script>
-// import $ from 'jquery';
 import BScroll from 'better-scroll';
 import {addClass} from 'common/js/dom';
 
 export default {
     name: 'slider',
     props: {
-        slider: {
+        sliderson: {
             type: Array
         },
         loop: {
@@ -47,13 +46,58 @@ export default {
     },
     mounted() {
         this._setSliderWidth();
+        this._initSlider();
     },
     methods: {
-        _setSliderWidth() {
+        _setSliderWidth(isResize) {
+        //     this.children = this.$refs.sliderGroup.children
+        //     let width = 0;
+        //     let sliderWidth = this.$refs.slider.clientWidth;
+        //     for(let i = 0; i < this.children.length; i++) {
+        //         let child = this.children[i]
+        //         addClass(child, "slider-item");
+        //         child.style.width = sliderWidth + 'px';
+        //         width += sliderWidth
+        //     }
+        //     if (this.loop && !isResize) {
+        //         width += 2 * sliderWidth;
+        //     }
+        //     this.$refs.sliderGroup.style.width = width + 'px';
+
+            this.children = this.$refs.sliderGroup.children;
             let width = 0;
-            let sliderWidth = $(this.$refs.slider).css("width");
-            console.log(sliderWidth);
-        }
+            let sliderWith = this.$refs.slider.clientWidth();
+            for (var i = 0; i < this.children.length; i++) {
+                let child = this.children.length[i];
+                if (!$(child).is('.slider-item')) {$(child).addClass('slider-item')}
+                child.style.width = sliderWidth + 'px';
+            }
+
+        },
+        _initSlider() {
+            this.slider = new BScroll(this.$refs.slider, {
+                scrollX: true,
+                scrollY: false,
+                momentum: false,
+                snap: true,
+                snapLoop: this.loop,
+                snapThreshold: 0.3,
+                snapSpeed: 400,
+                // click: true
+            })
+            this.slider.on("scrollEnd", () => {
+                let pageIndex = this.slider.getCurrentPage().pageX
+                if (this.loop) {
+                    pageIndex -= 1;
+                }
+                this.currentPageIndex = pageIndex;
+
+                if (this.autoPlay) {
+                    clearTimeout(this.timer);
+                    this._play();
+                }
+            })
+        },
     }
 };
 </script>
