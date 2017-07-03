@@ -27,7 +27,7 @@ export default {
         },
         interval: {
             type: Number,
-            default: 400
+            default: 3000
         }
     },
     data() {
@@ -107,6 +107,9 @@ export default {
                 this.slider.goToPage(pageIndex, 0, 400)
             }, this.interval)
         }
+    },
+    destroyed() {
+        clearTimeout(this.timer);
     }
 };
 </script>

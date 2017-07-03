@@ -122,3 +122,13 @@ props: {
 2. 父子传值的时候如 `<v-header :sellerSon="sellerParent"></v-header>`，其中 父组件获取数据是一个异步的过程，这时候 父组件的 `sellerParent` 还是空对象的时候 就会先将这个空对象给子组件，子组件一些 `sellerSon.something` 事实上为 `undefined`,而如果 需设置 `sellerSon.something[0].else` 时候就需要 加一个 `v-if` 来判断数据是否获取，不然 就是 `property '0' of undefined` 这种，会报错 
 3. 非动态传值时（如传递字符串）就不要使用 'v-bind' 语法了
 4. 一些组件的值也写在 props 里面，是为了 方便以后其它组件调用的时候直接对其进行修改
+
+### `<keep-alive>`
+组件切换的时候 如果 未加 `keep-alive` 标签，则 组件的生命周期 会 重新走一遍
+`<keep-alive>` 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们。
+
+### 杂项
+1. 组件切走的时候 内部 执行 destroyed 函数
+2. 后台返回数据 包含 `&gt;` 等一些html实体字符，插入到 html上时使用 `v-html` 指令，而不是 `{{}}` 这种模板语法
+3. watch 监视 组件中数据的改变，当相应数据发生改变执行相应函数
+4. 图片 自带两个方法，load 和 complete
