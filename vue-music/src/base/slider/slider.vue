@@ -38,7 +38,7 @@ export default {
     },
     mounted() {
         // setTimeout( () => {
-        // this.$nextTick(function () {
+        this.$nextTick(function () {
             this._setSliderWidth();
             this._initDots();
             this._initSlider();
@@ -52,7 +52,7 @@ export default {
                 this._setSliderWidth(true);
                 this.slider.refresh();
             })
-        // })
+        })
         // }, 20)
     },
     methods: {

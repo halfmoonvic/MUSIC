@@ -43,6 +43,9 @@ const data = Object.assign({}, commonParams, {
 参考链接： [es6 javascript对象方法Object.assign()](http://blog.csdn.net/qq_30100043/article/details/53422657)
 3. promise 在 数据中的应用
 在创建的 `var aa = new Promise((resolve, reject)=>{})`对象中 进行数据的请求，数据 请求成功后 进行链式的写法 aa.then(resData) 的形式处理数据
+4. Array 方法  
+    `var arr = new Array(5), // arr = [ , , , , , ]`  
+    `var arr = new Array(5, 1), // arr = [5, 1]`
 
 -----------
 
@@ -116,5 +119,6 @@ props: {
 注意：  
  
 1. 应用时，是 selectFoods[0].price 而不是 selectFoods.price
-2. 父子传值的时候如 `<v-header :sellerSon="sellerParent"></v-header>`，其中 附件获取数据是一个异步的过程，这时候 父组件的 `sellerParent` 还是空对象的时候 就会先将这个空对象给子组件，子组件一些 `sellerSon.something` 事实上为 `undefined`,而如果 需设置 `sellerSon.something[0].else` 时候就需要 加一个 `v-if` 来判断数据是否获取，不然 就是 `property '0' of undefined` 这种，会报错 
+2. 父子传值的时候如 `<v-header :sellerSon="sellerParent"></v-header>`，其中 父组件获取数据是一个异步的过程，这时候 父组件的 `sellerParent` 还是空对象的时候 就会先将这个空对象给子组件，子组件一些 `sellerSon.something` 事实上为 `undefined`,而如果 需设置 `sellerSon.something[0].else` 时候就需要 加一个 `v-if` 来判断数据是否获取，不然 就是 `property '0' of undefined` 这种，会报错 
 3. 非动态传值时（如传递字符串）就不要使用 'v-bind' 语法了
+4. 一些组件的值也写在 props 里面，是为了 方便以后其它组件调用的时候直接对其进行修改
