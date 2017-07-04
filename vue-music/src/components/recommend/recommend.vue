@@ -1,6 +1,6 @@
 <template>
     <div class="recommend">
-        <scroll ref="scroll"  class="recommend-content" :data="discList">
+        <scroll ref="scroll" class="recommend-content" :data="discList">
             <div>
                 <div class="slider-wrapper" v-if="recommends.length">
                     <slider>
@@ -26,6 +26,9 @@
                     </ul>
                 </div>
             </div>
+            <div class="loading-container" v-show="!discList.length">
+                <loading></loading>
+            </div>
         </scroll>
     </div>
 
@@ -36,13 +39,18 @@ import slider from './../../base/slider/slider.vue';
 import {getRecommend, getDiscList} from 'api/recommend';
 import {ERR_OK} from 'api/config';
 import Scroll from 'base/scroll/scroll';
+import Loading from 'base/loading/loading';
 
 export default {
     created() {
-        this.$nextTick(function () {
+        // this.$nextTick(function () {
             this._getRecommend();
+
+
+        // });
+        // setTimeout(function () {
             this._getDiscList();
-        });
+        // }, 2000)
     },
     data() {
         return {
@@ -52,7 +60,8 @@ export default {
     },
     components: {
         slider,
-        Scroll
+        Scroll,
+        Loading
     },
     methods: {
         _getRecommend() {
