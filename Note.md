@@ -33,19 +33,32 @@ flightHandler({
     而不是
     `data[k] !==undefined? value = data[k] : value = ''`  这样还需要 提前声明 value 变量
 2. 对象合并
-```
-const data = Object.assign({}, commonParams, {
-    platform: 'h5',
-    uin: 0,
-    needNewCode: 1
-})
-```
-参考链接： [es6 javascript对象方法Object.assign()](http://blog.csdn.net/qq_30100043/article/details/53422657)
+    ```
+    const data = Object.assign({}, commonParams, {
+        platform: 'h5',
+        uin: 0,
+        needNewCode: 1
+    })
+    ```
+
+    参考链接： [es6 javascript对象方法Object.assign()](http://blog.csdn.net/qq_30100043/article/details/53422657) 
+
 3. promise 在 数据中的应用
 在创建的 `var aa = new Promise((resolve, reject)=>{})`对象中 进行数据的请求，数据 请求成功后 进行链式的写法 aa.then(resData) 的形式处理数据
 4. Array 方法  
     `var arr = new Array(5), // arr = [ , , , , , ]`  
     `var arr = new Array(5, 1), // arr = [5, 1]`
+
+5. match() 方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。
+6. 触摸事件
+    * touchstart 当手指放在屏幕上触发。
+    * touchmove 当手指在屏幕上滑动时，连续地触发。
+    * touchend 当手指从屏幕上离开时触发。
+    * touchcancel 当系统停止跟踪时触发，系统什么时候取消，文档没有明确的说明。
+    * 【总】以上四个，是w3c提供的触摸事件，只针对触摸设备，最常用的是前三个。
+由于触摸会导致屏幕动来动去，所以可以会在这些事件的事件处理函数内使用event.preventDefault()，来阻止屏幕的默认滚动。
+
+7. 向下取整 a = 3.1 | 0 // a=3。 或0 与 Math.floor() 是一样的
 
 -----------
 
@@ -132,3 +145,4 @@ props: {
 2. 后台返回数据 包含 `&gt;` 等一些html实体字符，插入到 html上时使用 `v-html` 指令，而不是 `{{}}` 这种模板语法
 3. watch 监视 组件中数据的改变，当相应数据发生改变执行相应函数
 4. 图片 自带两个方法，load 和 complete
+5. 在vue里面，组件中的 props或data中的数据 都会添加 getter 和 setter，也就是vue会观测 props、data、和 computed 里面值的变化。然后 和 dom做 数据绑定。而在created中创建的不会监听
