@@ -65,14 +65,18 @@ export default {
     methods: {
         onShortcutTouchStart(e) {
             let anchorIndex = getData(e.target, 'index');
+
+            // e.touches[0] 与 click 事件中的 e.target 差不多
             let firstTouch = e.touches[0];
             this.touch.y1 = firstTouch.pageY;
+
             this.touch.anchorIndex = anchorIndex;
             this._scrollTo(anchorIndex);
         },
         onShortcutTouchMove(e) {
             let firstTouch = e.touches[0]
             this.touch.y2 = firstTouch.pageY
+
             let delta = (this.touch.y2 - this.touch.y1) / 18 | 0;
             let anchorIndex = parseInt(this.touch.anchorIndex) + delta
             this._scrollTo(anchorIndex);
@@ -86,13 +90,23 @@ export default {
         _calculateHeight() {
             this.listHeight = []
             const list = this.$refs.listGroup
-            let height = 0;
-            this.listHeight.push(height);
-            for (let i = 0; i < list.height; i++) {
-                let item = list[i];
-                height += item.clickHeight;
-                this.listHeight.push(height);
+            let height = 0
+            this.listHeight.push(height)
+            for (let i = 0; i < list.length; i++) {
+              let item = list[i]
+              height += item.clientHeight
+              this.listHeight.push(height)
             }
+            console.log(this.listHeight)
+            // this.listHeight = []
+            // const list = this.$refs.listGroup
+            // let height = 0;
+            // this.listHeight.push(height);
+            // for (let i = 0; i < list.height; i++) {
+            //     let item = list[i];
+            //     height += item.clientHeight;
+            //     this.listHeight.push(height);
+            // }
         }
     },
     watch: {
@@ -101,17 +115,37 @@ export default {
                 this._calculateHeight()
             }, 20)
         },
-        scrollY(newY) {
+        scrollY(newY, oldV) {
             const listHeight = this.listHeight;
             for (let i = 0; i < listHeight.length; i++) {
                 let height1 = listHeight[i];
                 let height2 = listHeight[i + 1];
                 if (!height2 || (-newY) > height1 && (-newY) < height2) {
+                    console.log(i)
                     this.currentIndex = i;
                     return
                 }
             }
             this.currentIndex = 0
+
+            // const listHeight = this.listHeight
+            // // 当滚动到顶部，newY>0
+            // if (newY > 0) {
+            //   this.currentIndex = 0
+            //   return
+            // }
+            // // 在中间部分滚动
+            // for (let i = 0; i < listHeight.length - 1; i++) {
+            //   let height1 = listHeight[i]
+            //   let height2 = listHeight[i + 1]
+            //   if (-newY >= height1 && -newY < height2) {
+            //     this.currentIndex = i
+            //     return
+            //   }
+            // }
+            // // 当滚动到底部，且-newY大于最后一个元素的上限
+            // this.currentIndex = listHeight.length - 2
+
         }
     }
 };

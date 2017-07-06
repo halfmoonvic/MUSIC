@@ -57,7 +57,8 @@ flightHandler({
     * touchcancel 当系统停止跟踪时触发，系统什么时候取消，文档没有明确的说明。
     * 【总】以上四个，是w3c提供的触摸事件，只针对触摸设备，最常用的是前三个。
 由于触摸会导致屏幕动来动去，所以可以会在这些事件的事件处理函数内使用event.preventDefault()，来阻止屏幕的默认滚动。
-
+    * [在移动端，手指点击一个元素，会经过：touchstart --> touchmove -> touchend --》click。](http://blog.csdn.net/lululove19870526/article/details/44345759)
+    * [touch对象](http://caibaojian.com/mobile-touch-event.html)
 7. 向下取整 a = 3.1 | 0 // a=3。 或0 与 Math.floor() 是一样的
 
 -----------
