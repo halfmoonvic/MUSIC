@@ -25,6 +25,7 @@ flightHandler({
 });
 ```
 之后 你事先在本地事先定义好 `flightHandler` 函数，如此返回来的数据 就直接调用 `flightHandler` 函数了（这也就是 前台与后端事先定义好回调函数的原因，不然怎么执行你本地的函数）
+
 ------------
 
 #### js 相关
@@ -60,6 +61,7 @@ flightHandler({
     * [在移动端，手指点击一个元素，会经过：touchstart --> touchmove -> touchend --》click。](http://blog.csdn.net/lululove19870526/article/details/44345759)
     * [touch对象](http://caibaojian.com/mobile-touch-event.html)
 7. 向下取整 a = 3.1 | 0 // a=3。 或0 与 Math.floor() 是一样的
+8. js 中 一切皆对象。通过 new 一个 构造函数 出来的东西 就是 一个 很彻底很常见的对象
 
 -----------
 
@@ -105,6 +107,12 @@ const router = new VueRouter({
 
 1. vue-router 在 安装成功后 需要 通过 Vue.use() 明确地安装路由功能 即 `Vue.use(VueRouter);`  
 2. 同 vue-router 一样，vue-resource 也需要通过 Vue.use 明确安装使用
+3. `vue.push()`
+``` 
+this.$router.push({
+    path: `/singer/${singer.id}`
+})
+```
 
 ##### 总结感想
 1. 路由的设置是 设置不同的路径对应着不同的组件。即一个 path 对应着 一个 component(components)。在页面中通过`<router-view>`来展示对应的组件。一个页面自然可以有多个组件（components）。
