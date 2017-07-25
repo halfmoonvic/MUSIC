@@ -1,13 +1,8 @@
 <template>
     <div class="slider" ref="slider">
         <div class="slider-group" ref="sliderGroup">
-            <!-- <slot> -->
-            <!-- </slot> -->
-            <div v-for="item in sliderson">
-                <a :href="item.linkUrl">
-                    <img :src="item.picUrl">
-                </a>
-            </div>
+            <slot>
+            </slot>
         </div>
         <div class="dots">
             <span class="dot" v-for="(item, index) in dots" :class="{active: currentPageIndex === index}"></span>
@@ -22,9 +17,6 @@ import {addClass} from 'common/js/dom';
 export default {
     name: 'slider',
     props: {
-        sliderson: {
-            type: Array
-        },
         loop: {
             type: Boolean,
             default: true
