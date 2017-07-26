@@ -23,7 +23,6 @@ export default {
     },
     created() {
         this._getDetail()
-        console.log(this.singer)
     },
     computed: {
         ...mapGetters([
