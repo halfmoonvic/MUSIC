@@ -62,6 +62,7 @@ flightHandler({
     * [touch对象](http://caibaojian.com/mobile-touch-event.html)
 7. 向下取整 a = 3.1 | 0 // a=3。 或0 与 Math.floor() 是一样的
 8. js 中 一切皆对象。通过 new 一个 构造函数 出来的东西 就是 一个 很彻底很常见的对象
+9. import 的对象 如果 是 默认导出的（`export default ...`），那么在import的时候注意不要 加 `{}` 这个了
 
 -----------
 
@@ -155,3 +156,7 @@ props: {
 3. watch 监视 组件中数据的改变，当相应数据发生改变执行相应函数
 4. 图片 自带两个方法，load 和 complete
 5. 在vue里面，组件中的 props或data中的数据 都会添加 getter 和 setter，也就是vue会观测 props、data、和 computed 里面值的变化。然后 和 dom做 数据绑定。而在created中创建的不会监听
+
+
+### vuex
+vuex 在兄弟组件中，通过 mutation 提交来 更改 state 中某一个数据。其他的组件，比如兄弟组件，通过 getter 来获取 已经被 更改过的的 state 中的那个数据
