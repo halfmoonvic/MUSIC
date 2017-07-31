@@ -1,29 +1,54 @@
 <template>
     <transition name="slide">
-        <div class="singer-detail" data-comp="歌手详情页组件">歌手详情页组件</div>
+        <!-- <div class="singer-detail" data-comp="歌手详情页组件">歌手详情页组件</div> -->
+        <music-list></music-list>
     </transition>
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
+import {getSingerDetail} from 'api/singer'
+import {ERR_OK} from 'api/config'
+import {createSong} from 'common/js/song'
+import musicList from 'components/music-list/music-list'
 
 export default {
     name: 'singer-detail',
-    props: {
-        title: {
-            type: String,
-            default: ''
-        }
-    },
     data() {
         return {
-
+            songs: []
         };
+    },
+    components: {
+        musicList
+    },
+    created() {
+        this._getDetail()
     },
     computed: {
         ...mapGetters([
             'singer'
         ])
+    },
+    methods: {
+        _getDetail() {
+            getSingerDetail(this.singer.id).then( (res) => {
+                if (res.code === ERR_OK) {
+                    this.songs = this._normalizeSongs(res.data.list)
+                    console.log(this.songs);
+                }
+            } )
+        },
+        _normalizeSongs(list) {
+            let ret = []
+            list.forEach((item, index) => {
+                let {musicData} = item
+                if (musicData.songid && musicData.albummid) {
+                    ret.push(createSong(musicData))
+                }
+            })
+            return ret
+        }
     }
 };
 </script>

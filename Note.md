@@ -63,6 +63,25 @@ flightHandler({
 7. 向下取整 a = 3.1 | 0 // a=3。 或0 与 Math.floor() 是一样的
 8. js 中 一切皆对象。通过 new 一个 构造函数 出来的东西 就是 一个 很彻底很常见的对象
 9. import 的对象 如果 是 默认导出的（`export default ...`），那么在import的时候注意不要 加 `{}` 这个了
+10. 对象结构方法中，在函数中的应用
+    ```
+    function removeBreakpoint({ url, line, column }) {
+      // ...
+      let a = url
+      let b = line 
+      let c = column
+    }
+    removeBreakpoint({
+        url: 'http://',
+        line: 3,
+        column: 4
+        })
+    // 真实过程则是 函数声明时的 {url, line, column} 等于函数 调用时的对象。  
+       则为 {url, line, colum} = obj(你传入的对象)  
+       然后在函数体内可直接使用这些 变量
+    ```
+
+
 
 -----------
 
