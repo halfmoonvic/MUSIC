@@ -1,6 +1,7 @@
 <template>
     <div class="singer">
-        <list-view :data="singers"></list-view>
+        <list-view @select="selectSinger" :data="singers"></list-view>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -39,7 +40,7 @@ export default {
             getSingerList().then((res) => {
                 if (res.code === ERR_OK) {
                     this.singers = this._normalizeSinger(res.data.list)
-                    console.log(this.singers)
+                    // console.log(this.singers)
                 }
             })
         },
@@ -86,6 +87,11 @@ export default {
                 return a.title.charCodeAt(0) - b.title.charCodeAt(0);
             })
             return hot.concat(ret)
+        },
+        selectSinger(singer) {
+            this.$router.push({
+                path: `/singer/${singer.id}`
+            })
         }
     }
 };

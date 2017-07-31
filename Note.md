@@ -156,6 +156,7 @@ props: {
 3. watch 监视 组件中数据的改变，当相应数据发生改变执行相应函数
 4. 图片 自带两个方法，load 和 complete
 5. 在vue里面，组件中的 props或data中的数据 都会添加 getter 和 setter，也就是vue会观测 props、data、和 computed 里面值的变化。然后 和 dom做 数据绑定。而在created中创建的不会监听
+6. v-bind: 可以所写为 :, v-on 的所写 是 @ !!!
 
 
 ### vuex

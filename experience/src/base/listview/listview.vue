@@ -4,7 +4,7 @@
             <li v-for="group in data" class="list-group" ref="listGroup">
                 <h2 class="list-group-title">{{group.title}}</h2>
                 <ul>
-                    <li v-for="item in group.items" class="list-group-item">
+                    <li @click="selectItem(item)" v-for="item in group.items" class="list-group-item">
                         <img class="avatar" v-lazy="item.avatar">
                         <span class="name">{{item.name}}</span>
                     </li>
@@ -22,6 +22,7 @@
 <script>
 import Scroll from 'base/scroll/scroll';
 import {getData} from 'common/js/dom';
+import {mapMutations} from 'vuex';
 
 export default {
     name: 'listview',
@@ -50,7 +51,14 @@ export default {
         onShortCutTouchStart(el) {
             let anchorIndex = getData(el.target, 'index');
             this.$refs.listview.scrollToElement(this.$refs.listGroup[anchorIndex], 0)
-        }
+        },
+        selectItem(item) {
+            this.$emit('select', item)
+            this.setSinger(item)
+        },
+        ...mapMutations({
+            setSinger: 'SET_SINGER'
+        })
     }
 };
 </script>
