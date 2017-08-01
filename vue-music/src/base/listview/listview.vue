@@ -117,7 +117,7 @@ export default {
             }
         },
         selectItem(item) {
-            this.$emit('select', item)
+            // this.$emit('select', item)
         }
     },
     watch: {
