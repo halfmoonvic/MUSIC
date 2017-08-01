@@ -14,12 +14,19 @@ export function addClass(el, className) {
 }
 
 export function getData(el, name, val) {
-    const prefix = 'data-'
     if (val) {
-        return el.setAttribute(prefix + name, val)
+        return el.setAttribute("data-" + name, val)
     }
-    return el.getAttribute(prefix + name)
+    return el.getAttribute("data-" + name)
 }
+
+// export function getData(el, name, val) {
+//     const prefix = 'data-'
+//     if (val) {
+//         return el.setAttribute(prefix + name, val)
+//     }
+//     return el.getAttribute(prefix + name)
+// }
 
 let elementStyle = document.createElement('div').style
 
