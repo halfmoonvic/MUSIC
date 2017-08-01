@@ -22,6 +22,9 @@ export default {
         // console.log(this.singer)
     },
     computed: {
+        ...mapGetters([
+            'singer'
+        ])
     }
 };
 </script>

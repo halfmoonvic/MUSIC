@@ -33,6 +33,7 @@
 <script>
 import Scroll from 'base/scroll/scroll'
 import {getData} from 'common/js/dom'
+import {mapMutations} from 'vuex'
 const ANCHOR_HEIGHT = 18;
 const TITLE_HEIGHT = 30;
 
@@ -121,7 +122,21 @@ export default {
             this.$router.push({
                 path: `singer/${item.id}`
             })
-        }
+
+            // 三种提交方式，推荐第一种
+            // this.setSinger(item)
+            console.log(this.$store);
+            this.$store.commit({
+                type: 'SET_SINGER',
+                singer: item
+            })
+            // this.$store.commit('SET_SINGER', {
+            //     singer: item
+            // })
+        },
+        ...mapMutations({
+            setSinger: 'SET_SINGER'
+        })
     },
     watch: {
         data() {
