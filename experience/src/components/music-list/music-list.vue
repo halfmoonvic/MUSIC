@@ -1,19 +1,65 @@
 <template>
-    <div class="music-list" data-comp="歌手详情页，音乐列表组件">歌手详情页，音乐列表组件</div>
+    <div class="music-list" data-comp="歌手详情页，音乐列表组件">
+        <div class="back" @click="back">
+            <i class="icon-back"></i>
+        </div>
+        <h1 class="title" v-html="title"></h1>
+        <div class="bg-image" :style="bgStyle" ref="bgImage">
+            <div class="play-wrapper">
+                <div class="play" v-show="songs.length > 0" ref="playButton">
+                    <div class="icon-play"></div>
+                    <span class="text">随机播放全部</span>
+                </div>
+            </div>
+            <div class="filter" ref="filter"></div>
+        </div>
+<!--         <scroll @scroll="scroll" :probe-type="probeType" :listen-scroll="listenScroll" :data="songs" class="list" ref="list">
+            <div class="song-list-wrapper">
+                <song-list :songs="songs"></song-list>
+            </div>
+            <div class="loading-container" v-show="!songs.length">
+                <loading></loading>
+            </div>
+        </scroll> -->
+    </div>
 </template>
 
 <script>
+import Loading from 'base/loading/loading'
+
 export default {
     name: 'music-list',
     props: {
         title: {
-            type: String
+            type: String,
+            default: ''
+        },
+        bgImage: {
+            type: String,
+            default: ''
+        },
+        songs: {
+            type: Array,
+            default: []
         }
     },
     data() {
         return {
 
         };
+    },
+    components: {
+        Loading
+    },
+    computed: {
+        bgStyle() {
+            return `background-image:url(${this.bgImage})`
+        }
+    },
+    methods: {
+        back() {
+            this.$router.back()
+        }
     }
 };
 </script>

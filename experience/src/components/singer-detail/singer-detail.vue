@@ -1,7 +1,7 @@
 <template>
     <transition name="slide">
         <!-- <div class="singer-detail" data-comp="歌手详情页组件">歌手详情页组件</div> -->
-        <music-list></music-list>
+        <music-list :title="title" :bgImage="bgImage" :songs="songs"></music-list>
     </transition>
 </template>
 
@@ -26,6 +26,12 @@ export default {
         this._getDetail()
     },
     computed: {
+        title() {
+            return this.singer.name
+        },
+        bgImage() {
+            return this.singer.avatar
+        },
         ...mapGetters([
             'singer'
         ])

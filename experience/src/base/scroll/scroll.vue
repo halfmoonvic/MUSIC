@@ -1,5 +1,5 @@
 <template>
-    <div ref="wrapper">
+    <div ref="wrapper" data-comp="better-scroll 滚动组件">
         <slot></slot>
     </div>
 </template>
