@@ -1,6 +1,6 @@
 <template>
     <div class="singer" ref="singer">
-        <list-view :data="singers"></list-view>
+        <list-view @select="selectSinger" :data="singers"></list-view>
         <router-view></router-view>
     </div>
 </template>
@@ -79,9 +79,13 @@ export default {
             })
             return hot.concat(ret)
         },
-        ...mapMutations({
-            setSinger: 'SET_SINGER'
-        })
+        selectSinger(singer) {
+            console.log('不用singer组件来push到singer-detail组件，直接在list-view中操作');
+            // console.log(singer);
+            // this.$router.push({
+            //     path: `singer/${singer.id}`
+            // })
+        }
     }
 };
 </script>

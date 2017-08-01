@@ -19,7 +19,7 @@ export default {
         };
     },
     created() {
-        console.log(this.singer)
+        // console.log(this.singer)
     },
     computed: {
     }
