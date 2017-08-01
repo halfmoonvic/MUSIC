@@ -67,9 +67,9 @@ export default {
             this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments)
         },
 
-        // _scrollTo(index) {
-        //     this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0)
-        // },
+        _scrollTo(index) {
+            this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0)
+        },
 
         scrollToElement() {
             this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
