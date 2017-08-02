@@ -1,10 +1,12 @@
 <template>
     <transition name="slide">
-        <div class="singer-detail">歌手详情</div>
+        <music-list :title="title" :bgImage="bgImage"></music-list>
     </transition>
 </template>
 
 <script>
+import MusicList from 'components/music-list/music-list'
+
 import {getSingerDetail} from 'api/singer'
 import {createSong} from 'common/js/song'
 import {ERR_OK} from 'api/config'
@@ -12,20 +14,24 @@ import {mapGetters} from 'vuex'
 
 export default {
     name: 'singer-detail',
-    props: {
-        title: {
-            type: String
-        }
-    },
     data() {
         return {
             songs: () => {[]}
         };
     },
+    components: {
+        MusicList
+    },
     created() {
         this._getSingerDetail()
     },
     computed: {
+        title() {
+            return this.singer.name
+        },
+        bgImage() {
+            return this.singer.avatar
+        },
         ...mapGetters([
             'singer'
         ])
@@ -36,18 +42,15 @@ export default {
                 // console.log(res.data.list);
                 if (res.code === ERR_OK) {
                     this.songs = this.nomalSingerDetail(res.data.list)
-                    // console.log(this.songs);
-                    console.log(res.data.list);
+                    console.log(this.songs);
                 }
             })
         },
         nomalSingerDetail(list) {
             let ret = []
             list.forEach((item, index) => {
-                let musicData = {item}
-                // if (musicData.songid && musicData.albummid) {
+                let {musicData} = item
                   ret.push(createSong(musicData))
-                // }
             })
             return ret
         }
