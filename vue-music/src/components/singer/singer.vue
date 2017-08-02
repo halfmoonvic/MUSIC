@@ -80,7 +80,7 @@ export default {
             return hot.concat(ret)
         },
         selectSinger(singer) {
-            console.log('不用singer组件来push到singer-detail组件，直接在list-view中操作');
+            // console.log('不用singer组件来push到singer-detail组件，直接在list-view中操作');
             // console.log(singer);
             // this.$router.push({
             //     path: `singer/${singer.id}`

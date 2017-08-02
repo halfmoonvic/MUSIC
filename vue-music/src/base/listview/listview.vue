@@ -125,7 +125,6 @@ export default {
 
             // 三种提交方式，推荐第一种
             // this.setSinger(item)
-            console.log(this.$store);
             this.$store.commit({
                 type: 'SET_SINGER',
                 singer: item
