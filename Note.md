@@ -62,6 +62,7 @@ flightHandler({
     * [touch对象](http://caibaojian.com/mobile-touch-event.html)
 7. 向下取整 a = 3.1 | 0 // a=3。 或0 与 Math.floor() 是一样的
 8. js 中 一切皆对象。通过 new 一个 构造函数 出来的东西 就是 一个 很彻底很常见的对象
+9. es6 语法中 反引号 中 注意 有时候 它要被包裹在一个括号里面的，如 `scale(${scale})`
 
 -----------
 

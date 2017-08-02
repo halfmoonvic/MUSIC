@@ -9,11 +9,20 @@
           </div>
           <div class="filter" ref="filter"></div>
         </div>
+        <div class="bg-layer" ref="layer"></div>
+        <scroll @scroll="scroll" :listenScroll="listenScroll" :probeType="probeType" :data="songs" class="list" ref="list">
+            <div class="song-list-wrapper">
+                <song-list :songs="songs"></song-list>
+            </div>
+        </scroll>
     </div>
 </template>
 
 <script>
 import Scroll from 'base/scroll/scroll'
+import songList from 'base/song-list/song-list'
+
+const RESERVED_HEIGHT = 40
 
 export default {
     name: 'music-list',
@@ -25,15 +34,29 @@ export default {
         bgImage: {
             type: String,
             default: ''
+        },
+        songs: {
+            type: Array,
+            default: () => {[]}
         }
     },
     data() {
         return {
-
+            scrollY: 0
         };
     },
     components: {
-        Scroll
+        Scroll,
+        songList
+    },
+    created() {
+        this.listenScroll = true
+        this.probeType = 3
+    },
+    mounted() {
+        this.imageHeight = this.$refs.bgImage.clientHeight
+        this.minTransalteY = -this.imageHeight + RESERVED_HEIGHT
+        this.$refs.list.$el.style.top = `${this.imageHeight}px`
     },
     computed: {
         bgStyle() {
@@ -43,6 +66,37 @@ export default {
     methods: {
         back() {
             this.$router.go(-1)
+        },
+        scroll(pos) {
+            this.scrollY = pos.y
+        }
+    },
+    watch: {
+        scrollY(newY, oldY) {
+            let translateY = Math.max(newY, this.minTransalteY)
+            this.$refs.layer.style.transform = `translate3d(0, ${translateY}px, 0)`
+
+            // 下拉歌曲列表的时候 图片放大效果
+            let zIndex = 0;
+            let scale = 1;
+            const percent = Math.abs(newY / this.imageHeight)
+            if (newY > 0) {
+                scale = 1 + percent
+                zIndex = 10;
+            }
+
+            // 上拉歌曲列表时，列表不要超出图片 newY < translateY 情况
+            if (newY < translateY) {
+                zIndex = 10
+                this.$refs.bgImage.style.paddingTop = 0
+                this.$refs.bgImage.style.height = `${RESERVED_HEIGHT}px`
+            } else {
+                this.$refs.bgImage.style.paddingTop = '70%'
+                this.$refs.bgImage.style.height = 0
+            }
+
+            this.$refs.bgImage.style.transform = `scale(${scale})`
+            this.$refs.bgImage.style.zIndex = zIndex
         }
     }
 };

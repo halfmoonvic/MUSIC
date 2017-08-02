@@ -1,20 +1,38 @@
 <template>
-    <div class="song-list" data-comp="歌曲列表组件">歌曲列表组件</div>
+    <div class="song-list" data-comp="歌曲列表组件">
+        <ul>
+            <li v-for="song in songs" class="item">
+              <div class="content">
+                  <h2 class="name">{{song.name}}</h2>
+                  <p class="desc">{{getDesc(song)}}</p>
+              </div>
+          </li>
+        </ul>
+    </div>
 </template>
 
 <script>
 export default {
-    name: '`song-list`',
+    name: 'song-list',
     props: {
         title: {
             type: String,
             default: ''
+        },
+        songs: {
+            type: Array,
+            default: () => {[]}
         }
     },
     data() {
         return {
 
         };
+    },
+    methods: {
+        getDesc(song) {
+            return `${song.singer}·${song.album}`
+        }
     }
 };
 </script>
