@@ -133,6 +133,46 @@ this.$router.push({
     path: `/singer/${singer.id}`
 })
 ```
+4. `':id'` 动态路径参数  动态路径参数 以冒号开头  
+    一个『路径参数』使用冒号 : 标记。当匹配到一个路由时，参数值会被设置到 this.$route.params，可以在每个组件内使用。
+
+```
+router-link
+<router-link to="/user/foo/post/aa"></router-link>
+
+路由定义
+router = [{
+    path: '/user/:id/post/:mid'
+    }]
+$router.params = {
+    id: foo,
+    mid: aa
+}
+```
+
+5. // 当 /user/:id/profile 匹配成功， // UserProfile 会被渲染在 User 的 <router-view> 中
+组件在特定的 `<router-view></router-view>` 上渲染，看起来像是 依据 层级的
+6. 通过 
+```
+this.$router.push({
+    path: '/foo',
+    query: {
+        id: 'aa',
+        name: 'cs'
+    }
+    })
+```
+来从一个组件（姑且称为a组件中）中跳转至 路由 为 `/foo` 对应的组件（姑且称b组件）。并且b组件可以通过 this.$route.query 方式获取query对应（注意不是 this.$router 而是 this.$route）  
+`this.$router` 好像指的一直都是 根实例的 router
+
+6. 命名路由
+    `<router-link :to="{ name: 'user', params: { userId: 123 }}">User</router-link>`  
+    `router.push({ name: 'user', params: { userId: 123 }})`
+    name 定义的是对应整个 `pant` 路径的路由  
+    对于 `<router-view name="a"></router-view>` 其 name 定义的是 相应的组件
+
+7. 继续 第5点笔记  
+    如果 router-view 没有设置名字，那么默认为 default。
 
 ##### 总结感想
 1. 路由的设置是 设置不同的路径对应着不同的组件。即一个 path 对应着 一个 component(components)。在页面中通过`<router-view>`来展示对应的组件。一个页面自然可以有多个组件（components）。

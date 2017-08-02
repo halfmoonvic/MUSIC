@@ -8,21 +8,6 @@ import footerTab from '@/components/tab_footer/tab_footer';
 
 Vue.use(Router);
 
-// export default new Router({
-//     routes: [{
-//         path: '/food',
-//         name: 'food',
-//         component: food
-//     }, {
-//         path: '/boy',
-//         name: 'boy',
-//         component: boy
-//     }, {
-//         path: '/girl',
-//         name: 'girl',
-//         component: girl
-//     }]
-// });
 const routes = [{
         path: '/food',
         name: 'food',

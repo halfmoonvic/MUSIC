@@ -7,21 +7,20 @@
 
 export default {
     name: 'boy',
-    props: {
-        title: {
-            type: String
-        }
-    },
     data() {
         return {
-
+            id: ''
         };
     },
     created() {
         // this._getRecommend();
+        this.getId()
     },
     methods: {
-
+        getId() {
+            console.log(this);
+            console.log(this.$route.query);
+        }
     }
 };
 </script>
