@@ -219,4 +219,5 @@ props: {
 
 
 ### vuex
-vuex 在兄弟组件中，通过 mutation 提交来 更改 state 中某一个数据。其他的组件，比如兄弟组件，通过 getter 来获取 已经被 更改过的的 state 中的那个数据
+1. vuex 在兄弟组件中，通过 mutation 提交来 更改 state 中某一个数据。其他的组件，比如兄弟组件，通过 getter 来获取 已经被 更改过的的 state 中的那个数据
+2. getters 选项的意义便是 在其它组件中 实时获取 store 中的 state。所以通知 store 中 有n个 state，getters 相应的就会有n+x个变量。x是指通过其中的n计算出来的其它变量
