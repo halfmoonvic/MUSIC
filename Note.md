@@ -80,6 +80,7 @@ flightHandler({
        则为 {url, line, colum} = obj(你传入的对象)  
        然后在函数体内可直接使用这些 变量
     ```
+11. 一些 语义话的 东西 可以放到 js/config.js 中，比如 mode有 0， 1， 2 三个值，则可以在 config.js 中 写上 `modeValue = {sequence: 0, loop: 1, random: 2}` 之后 `import modeValue` 使用时则是 `mode: modeValue.sequence` 
 
 
 
@@ -216,8 +217,11 @@ props: {
 4. 图片 自带两个方法，load 和 complete
 5. 在vue里面，组件中的 props或data中的数据 都会添加 getter 和 setter，也就是vue会观测 props、data、和 computed 里面值的变化。然后 和 dom做 数据绑定。而在created中创建的不会监听
 6. v-bind: 可以所写为 :, v-on 的所写 是 @ !!!
+7. javascript 动画勾子函数，中 回调函数 done 的作用是 调到 下一个动画
 
 
 ### vuex
 1. vuex 在兄弟组件中，通过 mutation 提交来 更改 state 中某一个数据。其他的组件，比如兄弟组件，通过 getter 来获取 已经被 更改过的的 state 中的那个数据
 2. getters 选项的意义便是 在其它组件中 实时获取 store 中的 state。所以通知 store 中 有n个 state，getters 相应的就会有n+x个变量。x是指通过其中的n计算出来的其它变量
+3. 在一个动作中多次改变 mutation，那么 将 这几个 mutation 放到一个 action当中去
+4. mutation_types 名称 用大写，在组件中导入的时候 就用对象形式 重新命名一下 `...mapMutations({setFullScreen: 'SET_FULL_SCREEN'})`。 而在 getter 当中 最初命名的时候 没有提取一个 类似 getter_types 的对象，直接按照驼峰式命名的，引入的时候 则是 通过数组方式拿过来直接用，如 `...mapGetters(['fullScreen'])`
