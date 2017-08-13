@@ -218,6 +218,7 @@ props: {
 5. 在vue里面，组件中的 props或data中的数据 都会添加 getter 和 setter，也就是vue会观测 props、data、和 computed 里面值的变化。然后 和 dom做 数据绑定。而在created中创建的不会监听
 6. v-bind: 可以所写为 :, v-on 的所写 是 @ !!!
 7. javascript 动画勾子函数，中 回调函数 done 的作用是 调到 下一个动画
+8. 阻止冒泡 @click.stop="fn"
 
 
 ### vuex
