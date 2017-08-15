@@ -4,8 +4,7 @@
                     @enter="enter"
                     @after-enter="afterEnter"
                     @leave="leave"
-                    @after-leave="afterLeave"
-        >
+                    @after-leave="afterLeave">
             <div class="normal-player" v-show="fullScreen">
                 <div class="background">
                     <img :src="currentSong.image" width="100%" height="100%">
@@ -32,13 +31,13 @@
                             <i class="icon-sequence"></i>
                         </div>
                         <div class="icon i-left">
-                            <i class="icon-prev"></i>
+                            <i @click="prev" class="icon-prev"></i>
                         </div>
                         <div class="icon i-center">
                             <i :class="playIcon" @click="togglePlaying"></i>
                         </div>
                         <div class="icon i-right">
-                            <i class="icon-next"></i>
+                            <i @click="next" class="icon-next"></i>
                         </div>
                         <div class="icon i-right">
                             <i class="icon-not-favorite"></i>
@@ -66,7 +65,8 @@
                 </div>
             </div>
         </transition>
-        <audio ref="audio" :src="currentSong.url"></audio>
+        <!-- <audio ref="audio" :src="currentSong.url"></audio> -->
+        <audio :src="currentSong.url" ref="audio" @canplay="ready" @error="error"></audio>
     </div>
 </template>
 
@@ -87,12 +87,12 @@ export default {
     },
     data() {
         return {
-
+            songReady: false
         }
     },
     computed: {
         cdCls() {
-            return this.playing ? 'play' : ''
+            return this.playing ? 'play' : 'play pause'
         },
         playIcon() {
             return this.playing ? 'icon-pause' : 'icon-play'
@@ -104,7 +104,8 @@ export default {
             'fullScreen',
             'playlist',
             'currentSong',
-            'playing'
+            'playing',
+            'currentIndex'
         ])
     },
     methods: {
@@ -172,25 +173,61 @@ export default {
                 scale
             }
         },
+        next() {
+            if (!this.songReady) {
+                return
+            }
+            let index = this.currentIndex + 1
+            if (index === this.playlist.length) {
+                index = 0
+            }
+            this.setCurrentIndex(index)
+            if (!this.playing) {
+                this.togglePlaying()
+            }
+            this.songReady = false
+        },
+        prev() {
+            let index = this.currentIndex - 1
+            console.log(index)
+            if (index === -1) {
+                index = this.playlist.length
+            }
+            console.log(index)
+            this.setCurrentIndex(index)
+
+            if (!this.playing) {
+                this.togglePlaying()
+            }
+            this.songReady = false
+        },
         togglePlaying() {
+            if (!this.songReady) {
+                return
+            }
             this.setPlayingState(!this.playing)
         },
+        ready() {
+            this.songReady = true
+        },
+        error() {},
         ...mapMutations({
             setFullScreen: 'SET_FULL_SCREEN',
-            setPlayingState: 'SET_PLAYING_STATE'
+            setPlayingState: 'SET_PLAYING_STATE',
+            setCurrentIndex: 'SET_CURRENT_INDEX'
         })
     },
     watch: {
         currentSong() {
-            this.$nextTick(() => {
+            setTimeout(() => {
                 this.$refs.audio.play()
-            })
+            }, 20)
         },
-        playing(newPlying) {
+        playing(val) {
             const audio = this.$refs.audio
-            this.$nextTick(() => {
-                newPlying ? audio.play() : audio.pause()
-            })
+            setTimeout(() => {
+                val ? audio.play() : audio.pause()
+            }, 20)
         }
     }
 }
@@ -443,4 +480,6 @@ export default {
       transform: rotate(0)
     100%
       transform: rotate(360deg)
+.player .normal-player .middle .middle-l .cd-wrapper .cd .pause
+  animation-play-state: paused
 </style>
