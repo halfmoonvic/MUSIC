@@ -81,6 +81,7 @@ flightHandler({
        然后在函数体内可直接使用这些 变量
     ```
 11. 一些 语义话的 东西 可以放到 js/config.js 中，比如 mode有 0， 1， 2 三个值，则可以在 config.js 中 写上 `modeValue = {sequence: 0, loop: 1, random: 2}` 之后 `import modeValue` 使用时则是 `mode: modeValue.sequence` 
+12. 5.2 | 0   => 输出的是5，简易的向下取整
 
 
 
