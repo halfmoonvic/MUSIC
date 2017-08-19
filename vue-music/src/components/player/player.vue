@@ -1,27 +1,22 @@
 <template>
-    <div class="player" v-show="playlist.length>0">
-        <transition name="normal"
-                    @enter="enter"
-                    @after-enter="afterEnter"
-                    @leave="leave"
-                    @after-leave="afterLeave"
-        >
+    <div class="player" v-show="playlist.length > 0">
+        <transition name="normal">
             <div class="normal-player" v-show="fullScreen">
                 <div class="background">
                     <img :src="currentSong.image" width="100%" height="100%">
                 </div>
                 <div class="top">
-                    <div class="back" @click="back">
-                        <div class="icon-back"></div>
+                    <div class="back">
+                        <div class="icon-back" @click="back"></div>
                     </div>
-                    <h1 class="title" v-html="currentSong.name"></h1>
-                    <h2 class="subtitle" v-html="currentSong.singer"></h2>
+                    <h1 class="title">{{currentSong.name}}</h1>
+                    <h2 class="subtitle"></h2>
                 </div>
                 <div class="middle">
                     <div class="middle-l">
                         <div class="cd-wrapper" ref="cdWrapper">
                             <div class="cd">
-                                <img :class="cdCls" :src="currentSong.image" alt="" class="image">
+                                <img alt="" :class="cdCls" :src="currentSong.image" class="image">
                             </div>
                         </div>
                     </div>
@@ -32,13 +27,13 @@
                             <i class="icon-sequence"></i>
                         </div>
                         <div class="icon i-left">
-                            <i class="icon-prev"></i>
+                            <i class="icon-prev" @click="prev"></i>
                         </div>
                         <div class="icon i-center">
-                            <i :class="playIcon" @click="togglePlaying"></i>
+                            <i :class="[playing ? 'icon-pause' : 'icon-play']" @click="togglePlaying"></i>
                         </div>
                         <div class="icon i-right">
-                            <i class="icon-next"></i>
+                            <i class="icon-next" @click="next"></i>
                         </div>
                         <div class="icon i-right">
                             <i class="icon-not-favorite"></i>
@@ -48,25 +43,25 @@
             </div>
         </transition>
         <transition name="mini">
-            <div class="mini-player" v-show="!fullScreen" @click="open">
+            <div class="mini-player" v-show="!fullScreen">
                 <div class="icon">
                     <div class="imgWrapper">
-                        <img :class="cdCls" :src="currentSong.image" width="40" height="40">
+                        <img :src="currentSong.image" width="40" height="40">
                     </div>
                 </div>
                 <div class="text">
-                    <h2 class="name" v-html="currentSong.name"></h2>
-                    <div class="desc" v-html="currentSong.singer"></div>
+                    <h2 class="name"></h2>
+                    <div class="desc"></div>
                 </div>
                 <div class="control">
-                    <i @click.stop="togglePlaying" :class="miniIcon"></i>
+                    <i ></i>
                 </div>
                 <div class="control">
                     <div class="icon-playlist"></div>
                 </div>
             </div>
         </transition>
-        <audio ref="audio" :src="currentSong.url"></audio>
+        <audio ref="audio" @canplay="ready" :src="currentSong.url"></audio>
     </div>
 </template>
 
@@ -87,110 +82,79 @@ export default {
     },
     data() {
         return {
-
+            songReady: false,
+            currentTime: 0
         }
     },
     computed: {
         cdCls() {
             return this.playing ? 'play' : ''
         },
-        playIcon() {
-            return this.playing ? 'icon-pause' : 'icon-play'
-        },
-        miniIcon() {
-            return this.playing ? 'icon-pause-mini' : 'icon-play-mini'
-        },
         ...mapGetters([
             'fullScreen',
-            'playlist',
             'currentSong',
-            'playing'
+            'playlist',
+            'playing',
+            'currentIndex'
         ])
     },
     methods: {
-        back() {
-            this.setFullScreen(false)
-            // this.$store.commit({
-            //     type: 'SET_FULL_SCREEN',
-            //     flag: false
-            // })
+        ready() {
+            this.songReady = true
         },
-        open() {
-            this.setFullScreen(true)
+        error() {
+            this.songReady = true
         },
-        enter(el, done) {
-            const {x, y, scale} = this._getPosAndScale()
-            let animation = {
-                0: {
-                    transform: `translate3d(${x}px,${y}px,0) scale(${scale})`
-                },
-                60: {
-                    transform: `translate3d(0,0,0) scale(1.1)`
-                },
-                100: {
-                    transform: `translate3d(0,0,0) scale(1)`
-                }
+        prev() {
+            if (!this.songReady) {
+                return
             }
-            animations.registerAnimation({
-                name: 'move',
-                animation,
-                presets: {
-                    duration: 400,
-                    easeing: 'linear'
-                }
-            })
-
-            animations.runAnimation(this.$refs.cdWrapper, 'move', done)
-        },
-        afterEnter() {
-            animations.unregisterAnimation('move')
-            this.$refs.cdWrapper.style.animation = ''
-        },
-        leave(el, done) {
-            this.$refs.cdWrapper.style.transition = "all 1.4s"
-            const {x, y, scale} = this._getPosAndScale()
-            this.$refs.cdWrapper.style[transform] = `translate3d(${x}px,${y}px,0) scale(${scale})`
-            this.$refs.cdWrapper.addEventListener('transitionend', done)
-        },
-        afterLeave() {
-            this.$refs.cdWrapper.style.transition = ''
-            this.$refs.cdWrapper.style[transform] = ''
-        },
-        _getPosAndScale() {
-            const tragetWidth = 40
-            const paddingLeft = 40
-            const paddingBottom = 30
-
-            const paddingTop = 80
-            const width = window.innerWidth * 0.8
-            const scale = tragetWidth / width
-            const x = -(window.innerWidth / 2 - paddingLeft)
-            const y = window.innerHeight - paddingTop - width / 2 - paddingBottom
-            return {
-                x,
-                y,
-                scale
+            let index = this.currentIndex - 1
+            console.log(index)
+            if (index === -1) {
+                index = this.playlist.length - 1
             }
+
+            this.setCurrentIndex(index)
+            this.songReady = false
+        },
+        next() {
+            if (!this.songReady) {
+                return
+            }
+            let index = this.currentIndex + 1
+            if (index === this.playlist.length) {
+                index = 0
+            }
+            this.setCurrentIndex(index)
+            if (!this.playing) {
+                this.togglePlaying()
+            }
+            this.songReady = false
         },
         togglePlaying() {
             this.setPlayingState(!this.playing)
         },
+        back() {
+            this.setFullScreen(false)
+        },
         ...mapMutations({
             setFullScreen: 'SET_FULL_SCREEN',
-            setPlayingState: 'SET_PLAYING_STATE'
+            setPlayingState: 'SET_PLAYING_STATE',
+            setCurrentIndex: 'SET_CURRENT_INDEX'
         })
     },
     watch: {
         currentSong() {
-            this.$nextTick(() => {
+            setTimeout(() => {
                 this.$refs.audio.play()
-            })
+            }, 20)
         },
-        playing(newPlying) {
+        playing(state) {
             const audio = this.$refs.audio
-            this.$nextTick(() => {
-                newPlying ? audio.play() : audio.pause()
-            })
+            setTimeout(() => {
+                state ? audio.play() : audio.pause()
+            }, 20)
         }
     }
 }
@@ -371,16 +335,16 @@ export default {
             text-align: left
           .icon-favorite
             color: $color-sub-theme
-      &.normal-enter-active, &.normal-leave-active
-        transition: all 0.4s
-        .top, .bottom
-          transition: all 0.4s cubic-bezier(0.86, 0.18, 0.82, 1.32)
-      &.normal-enter, &.normal-leave-to
-        opacity: 0
-        .top
-          transform: translate3d(0, -100px, 0)
-        .bottom
-          transform: translate3d(0, 100px, 0)
+      // &.normal-enter-active, &.normal-leave-active
+      //   transition: all 0.4s
+      //   .top, .bottom
+      //     transition: all 0.4s cubic-bezier(0.86, 0.18, 0.82, 1.32)
+      // &.normal-enter, &.normal-leave-to
+      //   opacity: 0
+      //   .top
+      //     transform: translate3d(0, -100px, 0)
+      //   .bottom
+      //     transform: translate3d(0, 100px, 0)
     .mini-player
       display: flex
       align-items: center
@@ -443,4 +407,20 @@ export default {
       transform: rotate(0)
     100%
       transform: rotate(360deg)
+
+.normal-enter-active, .normal-leave-active
+    transition: all .3s ease-in
+    .top, .bottom
+        transition: all 0.4s cubic-bezier(0.86, 0.18, 0.82, 1.32)
+.normal-enter, .normal-leave-to
+    opacity: 0
+    .top
+        transform: translate3d(0, -100px, 0)
+    .bottom
+        transform: translate3d(0, 100px, 0)
+@keyframes rotate
+  0%
+    transform: rotate(0)
+  100%
+    transform: rotate(360deg)
 </style>

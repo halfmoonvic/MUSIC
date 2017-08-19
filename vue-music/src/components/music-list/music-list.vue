@@ -24,7 +24,6 @@
         </scroll>
     </div>
 </template>
-
 <script>
 import Scroll from 'base/scroll/scroll'
 import SongList from 'base/song-list/song-list'
@@ -85,8 +84,6 @@ export default {
             this.$router.back()
         },
         selectItem(item, index) {
-            console.log(item);
-            console.log(index);
             // this.selectPlay({this.songs, index})
             this.selectPlay({
               list: this.songs,
