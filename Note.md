@@ -80,7 +80,7 @@ flightHandler({
        则为 {url, line, colum} = obj(你传入的对象)  
        然后在函数体内可直接使用这些 变量
     ```
-
+11. audio 可以派发的事件都有 canplay error timeupdate
 
 
 -----------
@@ -221,3 +221,7 @@ props: {
 ### vuex
 1. vuex 在兄弟组件中，通过 mutation 提交来 更改 state 中某一个数据。其他的组件，比如兄弟组件，通过 getter 来获取 已经被 更改过的的 state 中的那个数据
 2. getters 选项的意义便是 在其它组件中 实时获取 store 中的 state。所以通知 store 中 有n个 state，getters 相应的就会有n+x个变量。x是指通过其中的n计算出来的其它变量
+
+
+### 其它
+方法中 以下划线为开头的 `_pad()` 多是一些 工具函数，普通的没有下划线的多是与该组件密切相关的

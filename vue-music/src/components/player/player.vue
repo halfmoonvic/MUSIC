@@ -22,6 +22,11 @@
                     </div>
                 </div>
                 <div class="bottom">
+                    <div class="progress-wrapper">
+                        <div class="time time-l">{{format(currentTime)}}</div>
+                        <div class="progress-bar-wrapper"></div>
+                        <div class="time time-r">{{format(currentSong.duration)}}</div>
+                    </div>
                     <div class="operators">
                         <div class="icon i-left">
                             <i class="icon-sequence"></i>
@@ -61,7 +66,7 @@
                 </div>
             </div>
         </transition>
-        <audio ref="audio" @canplay="ready" :src="currentSong.url"></audio>
+        <audio ref="audio" @canplay="ready" :src="currentSong.url" @timeupdate="updateTime"></audio>
     </div>
 </template>
 
@@ -104,6 +109,23 @@ export default {
         },
         error() {
             this.songReady = true
+        },
+        updateTime(e) {
+            this.currentTime = e.target.currentTime
+        },
+        format(interval) {
+            interval = interval | 0
+            const minute = interval / 60 | 0
+            const second = this._pad(interval % 60)
+            return `${minute}:${second}`
+        },
+        _pad(num, n = 2) {
+            let len = num.toString().length
+            while(len < n) {
+                num = '0' + num
+                len++
+            }
+            return num
         },
         prev() {
             if (!this.songReady) {
@@ -423,4 +445,6 @@ export default {
     transform: rotate(0)
   100%
     transform: rotate(360deg)
+.player .normal-player .middle .middle-l .cd-wrapper .cd .pause
+  animation-play-state: paused
 </style>
