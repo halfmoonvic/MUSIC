@@ -24,7 +24,9 @@
                 <div class="bottom">
                     <div class="progress-wrapper">
                         <div class="time time-l">{{format(currentTime)}}</div>
-                        <div class="progress-bar-wrapper"></div>
+                        <div class="progress-bar-wrapper">
+                            <progress-bar :percent="percent"></progress-bar>
+                        </div>
                         <div class="time time-r">{{format(currentSong.duration)}}</div>
                     </div>
                     <div class="operators">
@@ -77,6 +79,8 @@ import {prefixStyle} from 'common/js/dom'
 
 const transform = prefixStyle('transform')
 
+import ProgressBar from 'base/progress-bar/progress-bar'
+
 export default {
     name: 'player',
     props: {
@@ -94,6 +98,9 @@ export default {
     computed: {
         cdCls() {
             return this.playing ? 'play' : ''
+        },
+        percent() {
+            return this.currentTime / this.currentSong.duration
         },
         ...mapGetters([
             'fullScreen',
@@ -178,6 +185,9 @@ export default {
                 state ? audio.play() : audio.pause()
             }, 20)
         }
+    },
+    components: {
+        ProgressBar
     }
 }
 </script>
