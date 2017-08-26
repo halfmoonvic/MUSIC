@@ -83,7 +83,9 @@ flightHandler({
 11. 一些 语义话的 东西 可以放到 js/config.js 中，比如 mode有 0， 1， 2 三个值，则可以在 config.js 中 写上 `modeValue = {sequence: 0, loop: 1, random: 2}` 之后 `import modeValue` 使用时则是 `mode: modeValue.sequence` 
 12. 5.2 | 0   => 输出的是5，简易的向下取整
 13. MoseEvent 了解笔记在 js note 中
-
+14. let a = 1 === 2 ? '' : 2 === 3 ? 3 : 'hehe'   => a = hehe
+15. mode = (this.mode + 1) % 3  mode 只可以是 0 1 2 三个值中的一个，切要一次切换
+16. 拷贝一个新的数组 arr = arr.slice()
 
 
 -----------
