@@ -19,15 +19,15 @@ function findIndex(list, song) {
 const actions = {
     selectPlay: ({commit, state}, {list, index}) => {
         commit(types.SET_SEQUENCE_LIST, list)
-        // if (state.mode === playMode.random) {
-        //     // 随机播放之后，主动点歌时，又造了一个 随机播放列表
-        //     let randomList = shuffle(list)
-        //     commit(types.SET_PLAYLIST, randomList)
-        //     index = findIndex(randomList, list[index])
-        // } else {
-        //     commit(types.SET_PLAYLIST, list)
-        // }
-        commit(types.SET_PLAYLIST, list)
+        if (state.mode === playMode.random) {
+            // 随机播放之后，主动点歌时，又造了一个 随机播放列表
+            let randomList = shuffle(list)
+            commit(types.SET_PLAYLIST, randomList)
+            index = findIndex(randomList, list[index])
+        } else {
+            commit(types.SET_PLAYLIST, list)
+        }
+        // commit(types.SET_PLAYLIST, list)
         commit(types.SET_CURRENT_INDEX, index)
         commit(types.SET_FULL_SCREEN, true)
         commit(types.SET_PLAYING_STATE, true)
