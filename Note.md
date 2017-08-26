@@ -80,12 +80,7 @@ flightHandler({
        则为 {url, line, colum} = obj(你传入的对象)  
        然后在函数体内可直接使用这些 变量
     ```
-11. 一些 语义话的 东西 可以放到 js/config.js 中，比如 mode有 0， 1， 2 三个值，则可以在 config.js 中 写上 `modeValue = {sequence: 0, loop: 1, random: 2}` 之后 `import modeValue` 使用时则是 `mode: modeValue.sequence` 
-12. 5.2 | 0   => 输出的是5，简易的向下取整
-13. MoseEvent 了解笔记在 js note 中
-14. let a = 1 === 2 ? '' : 2 === 3 ? 3 : 'hehe'   => a = hehe
-15. mode = (this.mode + 1) % 3  mode 只可以是 0 1 2 三个值中的一个，切要一次切换
-16. 拷贝一个新的数组 arr = arr.slice()
+11. audio 可以派发的事件都有 canplay error timeupdate
 
 
 -----------
@@ -97,6 +92,10 @@ flightHandler({
 2. cd '...'
 3. npm install
 4. npm run dev
+
+### 一些实现
+1. 子组件更改父组件某个传过来的值。 方法1 是在 watch 中添加父组件传过来的值，然后将传过来的值 赋值给 子组件的 中的一个值。方法2，子组件通过 派发事件的方式，将新值传给父组件，然后父组件在传回来从而实现真正意义上的更改
+2. vue 中 各个变量 多是通过 this.xxx 的方式拿到的，注意下，在定义许多函数的时候，或许我们根本不需要传参，而只需要在需要的地方 调用一下就好了，传输的参数 可以通过 this.xxx 方式直接拿到
 
 #### 2. 路由配置过程
 
@@ -227,6 +226,11 @@ props: {
 
 ### vuex
 1. vuex 在兄弟组件中，通过 mutation 提交来 更改 state 中某一个数据。其他的组件，比如兄弟组件，通过 getter 来获取 已经被 更改过的的 state 中的那个数据
-2. getters 选项的意义便是 在其它组件中 实时获取 store 中的 state。所以通知 store 中 有n个 state，getters 相应的就会有n+x个变量。x是指通过其中的n计算出来的其它变量
-3. 在一个动作中多次改变 mutation，那么 将 这几个 mutation 放到一个 action当中去
+2. getters 选项的意义便是 在其它组件中 实时获取 store 中的 state。所以通知 store 中 有n个 state，getters 相应的就会有n+x个变量。x是指通过其中的n计算出来的其它变量 
+3. 在一个动作中多次改变 mutation，那么 将 这几个 mutation 放到一个 action当中去 
 4. mutation_types 名称 用大写，在组件中导入的时候 就用对象形式 重新命名一下 `...mapMutations({setFullScreen: 'SET_FULL_SCREEN'})`。 而在 getter 当中 最初命名的时候 没有提取一个 类似 getter_types 的对象，直接按照驼峰式命名的，引入的时候 则是 通过数组方式拿过来直接用，如 `...mapGetters(['fullScreen'])`
+
+
+
+### 其它
+方法中 以下划线为开头的 `_pad()` 多是一些 工具函数，普通的没有下划线的多是与该组件密切相关的
