@@ -1,3 +1,6 @@
+import {getLyric} from 'api/song'
+import {ERR_OK} from 'api/config'
+
 export default class Song {
     constructor({id, mid, singer, name, album, duration, image, url}) {
       this.id = id
@@ -9,6 +12,16 @@ export default class Song {
       this.image = image
       this.url = url
     }
+
+    getLyric() {
+        getLyric(this.mid).then((res) => {
+            if (res.retconde === ERR_OK) {
+                this.lyric = res.lyric
+                console.log(this.lyric)
+            }
+        })
+    }
+
 }
 
 export function createSong(musicData) {

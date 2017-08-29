@@ -314,6 +314,7 @@ export default {
             }
             setTimeout(() => {
                 this.$refs.audio.play()
+                this.currentSong.getLyric()
             }, 20)
         },
         playing(val) {

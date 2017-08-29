@@ -56,7 +56,6 @@ export default {
         },
         progressClick(e) {
             const rect = this.$refs.progressBar.getBoundingClientRect()
-            console.log(this.$refs.progressBar)
             const offsetWidth = e.pageX - rect.left
             this._offset(offsetWidth)
             // 这里当我们点击 progressBtn 的时候， e.offsetX 获取不对
