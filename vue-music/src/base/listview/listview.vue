@@ -102,6 +102,9 @@ export default {
             this.scrollY = -this.listHeight[index];
             this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0)
         },
+        refresh() {
+            this.$refs.listview.refresh()
+        },
         scroll(pos) {
             this.scrollY = pos.y
         },

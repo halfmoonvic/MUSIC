@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="69552732-3ce3-4bc3-84b3-e770c6d9b062" name="默认" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Note.md" afterPath="$PROJECT_DIR$/Note.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/experience/package.json" afterPath="$PROJECT_DIR$/experience/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/experience/src/base/scroll/scroll.vue" afterPath="$PROJECT_DIR$/experience/src/base/scroll/scroll.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/experience/src/common/js/dom.js" afterPath="$PROJECT_DIR$/experience/src/common/js/dom.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/experience/src/common/js/singer.js" afterPath="$PROJECT_DIR$/experience/src/common/js/singer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/experience/src/components/singer/singer.vue" afterPath="$PROJECT_DIR$/experience/src/components/singer/singer.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/experience/src/main.js" afterPath="$PROJECT_DIR$/experience/src/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vue-music/.eslintrc" afterPath="$PROJECT_DIR$/vue-music/.eslintrc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vue-music/package.json" afterPath="$PROJECT_DIR$/vue-music/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vue-music/src/base/listview/listview.vue" afterPath="$PROJECT_DIR$/vue-music/src/base/listview/listview.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vue-music/src/components/singer/singer.vue" afterPath="$PROJECT_DIR$/vue-music/src/components/singer/singer.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vue-music/src/main.js" afterPath="$PROJECT_DIR$/vue-music/src/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vue-music/src/router/index.js" afterPath="$PROJECT_DIR$/vue-music/src/router/index.js" />
-    </list>
+    <list default="true" id="69552732-3ce3-4bc3-84b3-e770c6d9b062" name="默认" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -33,8 +18,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/experience/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="297">
+              <caret line="9" column="46" lean-forward="true" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -71,6 +56,7 @@
   </component>
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/ex-music/node_modules" />
+    <handled-path value="$PROJECT_DIR$/experience/node_modules" />
     <handled-path value="$PROJECT_DIR$/vue-music/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
@@ -94,8 +80,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -142,6 +126,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -176,14 +162,16 @@
       <workItem from="1500019710037" duration="692000" />
       <workItem from="1500023478700" duration="859000" />
       <workItem from="1500024954868" duration="1264000" />
+      <workItem from="1504257716278" duration="465000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3518000" />
+    <option name="totallyTimeSpent" value="3983000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16666667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329718" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -203,6 +191,9 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -211,6 +202,22 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/experience/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/webstorm.jar!/resources/html5-schema/html5/block.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7524">
+          <caret line="228" column="16" lean-forward="false" selection-start-line="228" selection-start-column="16" selection-end-line="228" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/experience/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -324,8 +331,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/experience/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state relative-caret-position="297">
+          <caret line="9" column="46" lean-forward="true" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
           <folding />
         </state>
       </provider>
