@@ -1,12 +1,13 @@
 <template>
-    <div>我是男孩</div>
+    <div @click="testMethods('呵呵')">我是男孩</div>
 </template>
 
 <script>
-// import {} from './config.js';
+import {testMixin} from 'common/js/mixin'
 
 export default {
     name: 'boy',
+    mixins: [testMixin],
     data() {
         return {
             id: ''
@@ -20,6 +21,9 @@ export default {
         getId() {
             console.log(this);
             console.log(this.$route.query);
+        },
+        testMethods() {
+            console.log('组件自身的方法')
         }
     }
 };
