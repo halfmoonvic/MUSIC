@@ -12,10 +12,13 @@ export const mode = state => state.mode
 
 export const currentIndex = state => state.currentIndex
 
-export const currentSong = (state) => {
-    return state.playlist[state.currentIndex] || {}
+// Getters 也可以接受其他 getters 作为第二个参数：
+export const currentSong = (state, getters) => {
+    // return state.playlist[state.currentIndex] || {}
+    return state.playlist[getters.currentIndex] || {}
 }
 
+export const disc = (state) => state.disc
 // const getters = {
 //     singer: state => state.singer
 //     currentSong(state) {
