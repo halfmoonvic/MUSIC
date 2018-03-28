@@ -98,7 +98,40 @@ flightHandler({
 1. 子组件更改父组件某个传过来的值。 方法1 是在 watch 中添加父组件传过来的值，然后将传过来的值 赋值给 子组件的 中的一个值。方法2，子组件通过 派发事件的方式，将新值传给父组件，然后父组件在传回来从而实现真正意义上的更改
 2. vue 中 各个变量 多是通过 this.xxx 的方式拿到的，注意下，在定义许多函数的时候，或许我们根本不需要传参，而只需要在需要的地方 调用一下就好了，传输的参数 可以通过 this.xxx 方式直接拿到
 3. 一些变量声明放在 created 里面声明 而不是在 data里面，是因为 这样的数据 不要要 getter setter。与dom有映射关系的则需要在data当中定义
+4. 提交的几种形式
+```
+actions 的提交..............
+this.selectPlay({
+    list: this.songs,
+    index: index
+})
+this.$store.dispatch({
+    type: 'selectPlay',
+    list: this.songs,
+    index: index
+})
+this.$store.dispatch('selectPlay', {
+    list: this.songs,
+    index: index
+})
 
+mutations 的提交..............
+this.setFullScreen(false)
+this.$store.commit({
+    type: 'SET_FULL_SCREEN',
+    flag: false
+})
+this.$store.commit({
+    type: 'SET_FULL_SCREEN',
+    flag: false
+})
+this.$store.commit('SET_FULL_SCREEN', {
+    flag: false
+})
+
+```
+
+    
 #### 2. 路由配置过程
 
 * 定义组件（路由） 即
@@ -231,6 +264,39 @@ props: {
 2. getters 选项的意义便是 在其它组件中 实时获取 store 中的 state。所以通知 store 中 有n个 state，getters 相应的就会有n+x个变量。x是指通过其中的n计算出来的其它变量 
 3. 在一个动作中多次改变 mutation，那么 将 这几个 mutation 放到一个 action当中去 
 4. mutation_types 名称 用大写，在组件中导入的时候 就用对象形式 重新命名一下 `...mapMutations({setFullScreen: 'SET_FULL_SCREEN'})`。 而在 getter 当中 最初命名的时候 没有提取一个 类似 getter_types 的对象，直接按照驼峰式命名的，引入的时候 则是 通过数组方式拿过来直接用，如 `...mapGetters(['fullScreen'])`
+5. mutation 与 action 提交方式
+```
+mutation提交方式
+this.setFullScreen({
+    flag: false
+})
+this.$store.commit({
+    type: 'SET_FULL_SCREEN',
+    flag: false
+})
+ this.$store.commit({
+     type: 'SET_FULL_SCREEN',
+     flag: false
+ })
+ this.$store.commit('SET_FULL_SCREEN', {
+     flag: false
+ })
+
+action 提交方式
+this.selectPlay({
+    list: this.songs,
+    index: index
+})
+ this.$store.dispatch('selectPlay', {
+     list: this.songs,
+     index: index
+ })
+this.$store.dispatch({
+    type: 'selectPlay',
+    list: this.songs,
+    index: index
+})
+```
 
 
 

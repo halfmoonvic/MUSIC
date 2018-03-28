@@ -91,15 +91,20 @@ export default {
             this.$router.back()
         },
         selectItem(item, index) {
-            // this.selectPlay({
-            //     list: this.songs,
-            //     index: index
-            // })
-            this.$store.dispatch({
-                type: 'selectPlay',
+            // 三种方式均可以
+            this.selectPlay({
                 list: this.songs,
                 index: index
             })
+            // this.$store.dispatch('selectPlay', {
+            //     list: this.songs,
+            //     index: index
+            // })
+            // this.$store.dispatch({
+            //     type: 'selectPlay',
+            //     list: this.songs,
+            //     index: index
+            // })
         },
         random() {
             this.randomPlay({
